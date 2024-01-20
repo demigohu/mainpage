@@ -134,7 +134,7 @@ function Navbar() {
             </div>
           ) : (
             <button
-              className="btn bg-[#ffd700] hover:bg-[#eccc15] border-none"
+              className="btn bg-[#ffd700] hover:bg-[#eccc15] border-none text-black"
               onClick={connectWallet}
             >
               Connect Wallet
