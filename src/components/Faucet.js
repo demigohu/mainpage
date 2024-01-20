@@ -54,7 +54,7 @@ const Faucet = () => {
 
   return (
     <div className="card border shadow-md w-[50%] mx-auto">
-      <div className="card-body flex-grow-0">
+      <div className="card-body flex-grow-0 text-black">
         <h2 className="card-title mb-5">Faucet Page</h2>
         <p>Recipient Address :</p>
         <input

@@ -43,7 +43,7 @@ const Portofolio = [
 
 const HomePage = () => {
   return (
-    <div className="pb-20">
+    <div className="pb-20 text-black">
       <h1 className="text-3xl text-center mb-16 font-bold">MY PORTOFOLIO</h1>
       <div className="grid grid-cols-3 gap-10">
         {Portofolio.map((value) => (
