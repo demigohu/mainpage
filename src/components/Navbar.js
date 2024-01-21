@@ -5,12 +5,14 @@ import { ethers } from "ethers"
 import Link from "next/link"
 import Image from "next/image"
 import Logo from "@/../public/logo.jpg"
+import { Divide as Hamburger } from "hamburger-react"
 
 function Navbar() {
   const [walletInfoVisible, setWalletInfoVisible] = useState(false)
   const [walletAddress, setWalletAddress] = useState("")
   const [balance, setBalance] = useState("")
   const [change, setChange] = useState(false)
+  const [isOpen, setOpen] = useState(false)
 
   const connectWallet = async () => {
     try {
@@ -78,8 +80,8 @@ function Navbar() {
   }
 
   return (
-    <div className="max-w-[1200px] mx-auto px-10 relative">
-      <div className="flex justify-between items-center py-5 text-black">
+    <div className="bg-[#8ec5fc]">
+      <div className="max-w-[1200px] mx-auto flex justify-between items-center md:px-20 px-5 py-3 md:p-5 text-white relative">
         <div className="flex items-center gap-2">
           <div className="w-[50px] h-[50px] rounded-full overflow-hidden">
             <Image
@@ -92,7 +94,7 @@ function Navbar() {
           </div>
           <p className="text-xl font-bold">Overgear</p>
         </div>
-        <div className="flex gap-16 font-semibold ">
+        <div className="hidden lg:flex gap-16 font-semibold ">
           <Link href={"/"} className="">
             Home
           </Link>
@@ -106,7 +108,7 @@ function Navbar() {
             RollApp
           </Link>
         </div>
-        <div className="flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {walletInfoVisible ? (
             <div>
               <div className="flex gap-5">
@@ -141,23 +143,93 @@ function Navbar() {
             </button>
           )}
         </div>
-        {change ? (
-          <div
-            className="flex items-center max-w-64 gap-2  overflow-hidden rounded-lg absolute right-10 shadow-xl top-[80px] z-50 border"
-            onClick={handleChange}
-          >
-            <div className="p-2 overflow-hidden">
-              <p className="text-xs font-semibold">{walletAddress}</p>
+
+        <div className="lg:hidden">
+          <Hamburger toggled={isOpen} toggle={setOpen} />
+          {isOpen ? (
+            <div className="flex flex-col items-center gap-10 font-semibold absolute right-0 bg-[#8ec5fc] w-full z-50 py-10 top-full transition-all">
+              <Link href={"/"} className="" onClick={() => setOpen(false)}>
+                Home
+              </Link>
+              <Link href={"faucet"} className="" onClick={() => setOpen(false)}>
+                Faucet
+              </Link>
+              <Link
+                href={"https://portal.dymension.xyz/rollapp/overgear_1229724-1"}
+                target="_blank"
+              >
+                RollApp
+              </Link>
+              <div className="lg:flex items-center gap-8">
+                {walletInfoVisible ? (
+                  <div>
+                    <div className="flex gap-5">
+                      <button className="btn bg-transparent text-black hover:bg-transparent ">
+                        {balance}
+                      </button>
+                      <div
+                        className="border text-white shadow-md px-2 rounded-lg cursor-pointer flex items-center gap-2 max-w-40 overflow-hidden"
+                        onClick={handleChange}
+                      >
+                        <div className="w-10 h-10 rounded-full overflow-hidden">
+                          <Image
+                            src={a}
+                            alt=""
+                            width={100}
+                            height={100}
+                            className="w-full h-full"
+                          />
+                        </div>
+                        <p className="max-w-20 text-xs text-black font-semibold overflow-hidden">
+                          {walletAddress}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    className="btn btn-neutral text-white border-none"
+                    onClick={connectWallet}
+                  >
+                    Connect Wallet
+                  </button>
+                )}
+              </div>
             </div>
-            <button
-              onClick={disconnectWallet}
-              className="btn bg-[#f83600] hover:bg-[#df451a] text-white border-none"
-            >
-              Disconnect Wallet
-            </button>
-          </div>
-        ) : null}
+          ) : (
+            <div className="flex flex-col items-center gap-10 font-semibold absolute right-0 bg-[#8ec5fc] w-full z-50 py-10 -top-[500px] transition-all">
+              <Link href={"/"} className="">
+                Home
+              </Link>
+              <Link href={"faucet"} className="">
+                Faucet
+              </Link>
+              <Link
+                href={"https://portal.dymension.xyz/rollapp/overgear_1229724-1"}
+                target="_blank"
+              >
+                RollApp
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
+      {change ? (
+        <div
+          className="flex items-center max-w-64 gap-2  overflow-hidden rounded-lg absolute right-10 shadow-xl top-[80px] z-50 border"
+          onClick={handleChange}
+        >
+          <div className="p-2 overflow-hidden">
+            <p className="text-xs font-semibold">{walletAddress}</p>
+          </div>
+          <button
+            onClick={disconnectWallet}
+            className="btn bg-[#f83600] hover:bg-[#df451a] text-white border-none"
+          >
+            Disconnect Wallet
+          </button>
+        </div>
+      ) : null}
     </div>
   )
 }
