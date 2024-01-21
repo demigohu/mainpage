@@ -51,7 +51,7 @@ const HomePage = () => {
             </figure>
             <div className="card-body">
               <h2 className="card-title">{value.title}</h2>
-              <Link href={value.link} className="text-sky-700">
+              <Link href={value.link} target="_blank" className="text-sky-700">
                 {value.link}
               </Link>
               <p>{value.description}</p>
