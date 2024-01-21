@@ -90,7 +90,7 @@ function Navbar() {
               className="w-full h-full"
             />
           </div>
-          <p className="text-xl font-bold">OVRS</p>
+          <p className="text-xl font-bold">Overgear</p>
         </div>
         <div className="flex gap-16 font-semibold ">
           <Link href={"/"} className="">
